@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Inland Sea Camp - join the trip</title>
+<meta name="robots" content="noindex">
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#13202a;color:#eef3f5;font:16px system-ui,-apple-system,Roboto,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#1c2e3b;border:1px solid #2f4a5c;border-radius:16px;padding:22px;width:min(94vw,440px);text-align:center}
+h1{color:#f2b544;font-size:22px;margin:6px 0 4px}.ar{font-family:Tahoma,system-ui,sans-serif}
+#what{color:#c9d6dd;margin:4px 0 12px;min-height:1.3em}
+.code{font:700 28px ui-monospace,Consolas,monospace;letter-spacing:4px;background:#0f1a22;border-radius:12px;padding:10px;margin:8px 0}
+.btn{display:block;width:100%;padding:14px;border-radius:12px;border:0;font-size:17px;font-weight:700;margin-top:10px;text-decoration:none;cursor:pointer}
+.go{background:#f2b544;color:#1a1408}.grey{background:#2a4252;color:#eef3f5}.off{opacity:.55;pointer-events:none}
+small{display:block;color:#93a8b4;margin-top:14px;line-height:1.4}
+</style></head><body>
+<div class="card">
+  <div style="font-size:54px">&#9978;</div>
+  <h1>Inland Sea Camp</h1>
+  <div class="ar" dir="rtl">رحلة خور العديد</div>
+  <div id="what">You're invited to join the trip.<br><span class="ar" dir="rtl">أنت مدعو للانضمام إلى الرحلة.</span></div>
+  <div class="code" id="code"></div>
+  <a class="btn go" id="open" href="#">Open in the app &nbsp;|&nbsp; <span class="ar">افتح في التطبيق</span></a>
+  <div id="get">
+    <small>No app yet? Get it, then tap this link again (or type the code above).<br><span class="ar" dir="rtl">ما عندك التطبيق؟ حمّله ثم اضغط الرابط مرة ثانية أو اكتب الرمز.</span></small>
+    <a class="btn grey" id="android" href="InlandSeaCamp.apk">Download for Android &nbsp;|&nbsp; <span class="ar">تحميل للأندرويد</span></a>
+    <a class="btn grey" id="ios" href="#">iPhone &nbsp;|&nbsp; <span class="ar">آيفون</span></a>
+  </div>
+  <small>Your location is only shared while you've pressed "I'm heading out".<br><span class="ar" dir="rtl">موقعك يظهر فقط أثناء الرحلة.</span></small>
+</div>
+<script>
+// The invite code is in ?g=CODE. This page hands it to the app (inlandsea://join?g=CODE) and shows where to get the app.
+var IOS = '';   // fill in when the iPhone app is published
+var m = /[?&#]g=([A-Za-z0-9]+)/.exec(location.search + location.hash);
+var g = m ? m[1].toUpperCase() : '';
+var isAndroid = /Android/i.test(navigator.userAgent);
+var isApple = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent) && 'ontouchend' in document;
+var openEl = document.getElementById('open');
+document.getElementById('code').textContent = g || '------';
+if (!g) { document.getElementById('what').textContent = 'This link has no invite code. Ask for the link again.'; openEl.classList.add('off'); }
+openEl.href = isAndroid ? 'intent://join?g=' + g + '#Intent;scheme=inlandsea;end' : 'inlandsea://join?g=' + g;
+var ios = document.getElementById('ios');
+if (IOS) ios.href = IOS; else { ios.innerHTML += ' - coming soon'; ios.classList.add('off'); }
+if (isAndroid) ios.style.display = 'none';
+if (isApple) document.getElementById('android').style.display = 'none';
+// Android: try the app once by itself (the button works too)
+if (g && isAndroid) setTimeout(function () { location.href = openEl.href; }, 400);
+</script>
+</body></html>
