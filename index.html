@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Wainkum - join the trip | وينكم</title>
+<title>Wainkum - join the trip</title>
 <meta name="robots" content="noindex">
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:#13202a;color:#eef3f5;font:16px system-ui,-apple-system,Roboto,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
 .card{background:#1c2e3b;border:1px solid #2f4a5c;border-radius:16px;padding:22px;width:min(94vw,440px);text-align:center}
-h1{color:#f2b544;font-size:22px;margin:6px 0 4px}.ar{font-family:Tahoma,system-ui,sans-serif}
+h1{color:#f2b544;font-size:22px;margin:6px 0 4px}
 #what{color:#c9d6dd;margin:4px 0 12px;min-height:1.3em}
 .code{font:700 28px ui-monospace,Consolas,monospace;letter-spacing:4px;background:#0f1a22;border-radius:12px;padding:10px;margin:8px 0}
 .btn{display:block;width:100%;padding:14px;border-radius:12px;border:0;font-size:17px;font-weight:700;margin-top:10px;text-decoration:none;cursor:pointer}
@@ -16,20 +16,20 @@ small{display:block;color:#93a8b4;margin-top:14px;line-height:1.4}
 <div class="card">
   <div style="font-size:54px">&#9978;</div>
   <h1>Wainkum</h1>
-  <div class="ar" dir="rtl">وينكم</div>
-  <div style="color:#93a8b4;font-size:14px">Where are you all? &nbsp;|&nbsp; <span class="ar">وينكم؟</span></div>
-  <div id="what">You're invited to join the trip.<br><span class="ar" dir="rtl">أنت مدعو للانضمام إلى الرحلة.</span></div>
+  <div style="color:#93a8b4;font-size:14px">Where are you all?</div>
+  <div id="what">You're invited to join the trip.</div>
   <div class="code" id="code"></div>
-  <a class="btn go" id="open" href="#">Open in Wainkum &nbsp;|&nbsp; <span class="ar">افتح في وينكم</span></a>
+  <a class="btn go" id="open" href="#">Open in Wainkum</a>
   <div id="get">
-    <small>No Wainkum app yet? Get it, then tap this link again (or type the code above).<br><span class="ar" dir="rtl">ما عندك تطبيق وينكم؟ حمّله ثم اضغط الرابط مرة ثانية أو اكتب الرمز.</span></small>
-    <a class="btn grey" id="android" href="Wainkum.apk" download="Wainkum.apk">Download Wainkum for Android &nbsp;|&nbsp; <span class="ar">تحميل وينكم للأندرويد</span></a>
-    <a class="btn grey" id="ios" href="#">iPhone &nbsp;|&nbsp; <span class="ar">آيفون</span></a>
+    <small>No Wainkum app yet? Get it, then tap this link again (or type the code above).</small>
+    <a class="btn grey" id="android" href="Wainkum.apk" download="Wainkum.apk">Download Wainkum for Android</a>
+    <a class="btn grey" id="ios" href="#">iPhone</a>
   </div>
-  <small>Your location is only shared while you've pressed "I'm heading out".<br><span class="ar" dir="rtl">موقعك يظهر فقط أثناء الرحلة.</span></small>
+  <small>Your location is only shared while you've pressed "I'm heading out".</small>
 </div>
 <script>
 // The invite code is in ?g=CODE. This page hands it to the app (inlandsea://join?g=CODE) and shows where to get the app.
+// English only (2026-11-15): no Arabic on this page.
 var IOS = '';   // fill in when the iPhone app is published
 var m = /[?&#]g=([A-Za-z0-9]+)/.exec(location.search + location.hash);
 var g = m ? m[1].toUpperCase() : '';
