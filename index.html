@@ -25,7 +25,8 @@ small{display:block;color:#93a8b4;margin-top:14px;line-height:1.4}
     <a class="btn grey" id="android" href="Wainkum.apk" download="Wainkum.apk">Download Wainkum for Android &nbsp;|&nbsp; <span class="ar" dir="rtl">تحميل Wainkum للأندرويد</span></a>
     <a class="btn grey" id="ios" href="#">iPhone &nbsp;|&nbsp; <span class="ar">آيفون</span></a>
   </div>
-  <small>Your location is only shared while you've pressed "I'm heading out".<br><span class="ar" dir="rtl">موقعك يظهر فقط أثناء الرحلة.</span></small>
+  <small>Your location is shared only with your own group, and only while sharing is on.<br><span class="ar" dir="rtl">موقعك يظهر لمجموعتك فقط، وفقط وقت المشاركة.</span></small>
+  <small><a href="privacy.html" style="color:#f2b544">Privacy</a> &middot; <a href="terms.html" style="color:#f2b544">Terms</a> &middot; <a href="support.html" style="color:#f2b544">Support</a></small>
 </div>
 <script>
 // English + Arabic again (0.5.15); the app name stays "Wainkum" in English letters, also in the Arabic lines.
@@ -37,7 +38,9 @@ var isAndroid = /Android/i.test(navigator.userAgent);
 var isApple = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent) && 'ontouchend' in document;
 var openEl = document.getElementById('open');
 document.getElementById('code').textContent = g || '------';
-if (!g) { document.getElementById('what').textContent = 'This link has no invite code. Ask for the link again.'; openEl.classList.add('off'); }
+if (!g) { // no invite code: the app's home page (also the App Store marketing link)
+  document.getElementById('what').innerHTML = 'Group trips made easy: see your group on a live map, talk with one button, send an SOS.<br><span class="ar" dir="rtl">رحلات المجموعات أسهل: شوف مجموعتك على خريطة مباشرة، تكلم بزر واحد، وأرسل SOS.</span>';
+  document.getElementById('code').style.display = 'none'; openEl.style.display = 'none'; }
 openEl.href = isAndroid ? 'intent://join?g=' + g + '#Intent;scheme=inlandsea;end' : 'inlandsea://join?g=' + g;
 var ios = document.getElementById('ios');
 if (IOS) ios.href = IOS; else { ios.innerHTML += ' - coming soon'; ios.classList.add('off'); }
