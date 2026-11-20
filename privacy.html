@@ -40,6 +40,7 @@ h1{color:#f2b544;font-size:26px;margin:4px 0}h2{color:#f2b544;font-size:19px;mar
 <li><b>Saved tracks</b> you choose to save (and whom you share them with).</li>
 <li><b>Reports and blocks</b> you make, so the team can act on them.</li>
 <li><b>Technical</b>: the app version on your phone and when the app was last heard from (to show who is online).</li>
+<li><b>Talk alerts</b> (since 0.6.3): your phone's push address (a token from Google Firebase Cloud Messaging or Apple Push Notification service) so you can get "Ahmed is talking in Family" while the app is closed. Turn it off in Settings &gt; Talk alerts when the app is closed; it is deleted with your account.</li>
 </ul>
 <p>The app uses the camera only to take a profile or group photo or to scan an invite QR code, and your photo library only when you pick a photo. Nothing else on your phone is read.</p>
 
@@ -55,6 +56,7 @@ h1{color:#f2b544;font-size:26px;margin:4px 0}h2{color:#f2b544;font-size:19px;mar
 <ul>
 <li>Database and files: <b>Supabase</b>, servers in Mumbai, India (Amazon Web Services).</li>
 <li>Live voice is passed through <b>LiveKit</b> servers to your group in real time (not stored).</li>
+<li>Talk alerts are delivered by <b>Google Firebase Cloud Messaging</b> (Android) and <b>Apple Push Notification service</b> (iPhone): they get the push address and the alert text ("name is talking in group"), nothing else.</li>
 <li>Map pictures come from <b>Esri</b> and <b>OpenStreetMap</b> map servers. They see the map area your phone asks for and your internet address, not who you are.</li>
 </ul>
 <p>Everything is sent over encrypted connections (HTTPS / TLS).</p>
@@ -100,6 +102,7 @@ h1{color:#f2b544;font-size:26px;margin:4px 0}h2{color:#f2b544;font-size:19px;mar
 <li><b>المسارات المحفوظة</b> اللي تختار تحفظها (ومع من تشاركها).</li>
 <li><b>البلاغات والحظر</b> اللي تسويها.</li>
 <li><b>معلومات تقنية</b>: نسخة التطبيق وآخر مرة وصل منه شي (عشان نبين من متصل).</li>
+<li><b>تنبيه الكلام</b> (من 0.6.3): عنوان الإشعارات لتلفونك (رمز من Google Firebase Cloud Messaging أو Apple Push Notification service) عشان يوصلك "أحمد يتكلم في العائلة" والتطبيق مسكّر. تقدر تطفيه من الإعدادات &gt; تنبيه الكلام والتطبيق مسكّر، وينحذف مع حسابك.</li>
 </ul>
 <p>الكاميرا تُستخدم فقط لصورة الملف أو المجموعة أو لمسح رمز QR للدعوة، والصور فقط لما تختار صورة.</p>
 <h2>من يشوفها</h2>
@@ -113,6 +116,7 @@ h1{color:#f2b544;font-size:26px;margin:4px 0}h2{color:#f2b544;font-size:19px;mar
 <ul>
 <li>قاعدة البيانات والملفات: <b>Supabase</b> في مومباي، الهند (Amazon Web Services).</li>
 <li>الصوت المباشر يمر عبر خوادم <b>LiveKit</b> لمجموعتك مباشرة (ما ينحفظ).</li>
+<li>تنبيه الكلام يوصل عن طريق <b>Google Firebase Cloud Messaging</b> (أندرويد) و<b>Apple Push Notification service</b> (آيفون): ياخذون عنوان الإشعارات ونص التنبيه بس.</li>
 <li>صور الخريطة من <b>Esri</b> و<b>OpenStreetMap</b>: يشوفون منطقة الخريطة وعنوان الإنترنت، مو هويتك.</li>
 </ul>
 <p>كل شي ينرسل باتصال مشفر (HTTPS / TLS).</p>
