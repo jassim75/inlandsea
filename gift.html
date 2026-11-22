@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0f7080">
+<title>Wainkum - a gift for you</title>
+<meta name="robots" content="noindex">
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#13202a;color:#eef3f5;font:16px system-ui,-apple-system,Roboto,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#1c2e3b;border:1px solid #2f4a5c;border-radius:16px;padding:22px;width:min(94vw,440px);text-align:center}
+h1{color:#f2b544;font-size:26px;margin:8px 0 2px}.ar{font-family:Tahoma,system-ui,sans-serif}
+.sub{color:#c9d6dd;margin:2px 0 14px}
+ul{list-style:none;padding:0;margin:8px auto 14px;text-align:left;display:inline-block;font-size:17px}li{margin:6px 0}li b{color:#f2b544;margin-right:10px}
+.btn{display:block;width:100%;padding:14px;border-radius:12px;border:0;font-size:17px;font-weight:700;margin-top:10px;text-decoration:none;cursor:pointer}
+.go{background:#e2861c;color:#fff}.grey{background:#2a4252;color:#eef3f5}
+.code{font:700 20px ui-monospace,Consolas,monospace;letter-spacing:2px;background:#0f1a22;border-radius:12px;padding:8px;margin:10px 0}
+small{display:block;color:#93a8b4;margin-top:12px;line-height:1.4}
+</style></head><body>
+<div class="card">
+  <img src="icon-192.png" width="80" height="80" alt="Wainkum" style="border-radius:18px;display:block;margin:0 auto 4px">
+  <h1>A gift for you <span class="ar" dir="rtl">&nbsp;|&nbsp; هدية لك</span></h1>
+  <div class="sub">Wainkum Premium, from the Wainkum owner<br><span class="ar" dir="rtl">Wainkum بريميوم، من صاحب Wainkum</span></div>
+  <ul><li><b>+</b>Bigger groups (50)</li><li><b>+</b>Private talk</li><li><b>+</b>Watch apps</li><li><b>+</b>Offline maps</li></ul>
+  <a class="btn go" id="open" href="#">Open my gift in Wainkum &nbsp;|&nbsp; <span class="ar" dir="rtl">افتح هديتي في Wainkum</span></a>
+  <div class="code" id="code"></div>
+  <small id="how">No Wainkum yet? Install it first, then tap your link again.<br><span class="ar" dir="rtl">ما عندك Wainkum؟ حمّله أول، وبعدين اضغط الرابط مرة ثانية.</span></small>
+  <a class="btn grey" id="install" href="#">Install Wainkum &nbsp;|&nbsp; <span class="ar" dir="rtl">حمّل Wainkum</span></a>
+  <a class="btn grey" id="store" href="#">Or accept it straight in the store &nbsp;|&nbsp; <span class="ar" dir="rtl">أو اقبلها في المتجر مباشرة</span></a>
+  <small>SOS and the siren are always free. <span class="ar" dir="rtl">الطوارئ والصفارة دايماً مجانية.</span></small>
+  <small><a href="privacy.html" style="color:#f2b544">Privacy</a> &middot; <a href="terms.html" style="color:#f2b544">Terms</a> &middot; <a href="support.html" style="color:#f2b544">Support</a></small>
+</div>
+<script>
+// 0.6.8 gift link: gift.html#<i|a>.<gift id>.<CODE>. The part after # never reaches any web server.
+// This page only hands the gift to the app (inlandsea://gift?...) or to the store's own redeem page. No prices here.
+var APP_ID = '6834355382', PKG = 'qa.inlandsea.camp';
+var m = /^#?([ia])\.([0-9a-fA-F-]{36})\.([A-Za-z0-9-]{4,64})$/.exec(location.hash || '');
+var p = m ? m[1] : '', g = m ? m[2] : '', c = m ? m[3].toUpperCase() : '';
+var isAndroid = /Android/i.test(navigator.userAgent);
+var openEl = document.getElementById('open'), store = document.getElementById('store'), inst = document.getElementById('install');
+document.getElementById('code').textContent = c ? 'Code: ' + c : '';
+var q = 'gift?p=' + p + '&g=' + g + '&c=' + encodeURIComponent(c);
+openEl.href = isAndroid ? 'intent://' + q + '#Intent;scheme=inlandsea;package=' + PKG + ';end' : 'inlandsea://' + q;
+var iphone = p === 'i';
+inst.href = iphone ? 'https://apps.apple.com/app/id' + APP_ID : 'https://play.google.com/store/apps/details?id=' + PKG;
+store.href = iphone ? 'https://apps.apple.com/redeem?ctx=offercodes&id=' + APP_ID + '&code=' + encodeURIComponent(c)
+                    : 'https://play.google.com/redeem?code=' + encodeURIComponent(c);
+if (!m) { openEl.style.display = 'none'; store.style.display = 'none';
+  document.getElementById('how').textContent = 'This gift link is not complete - ask for it again. | رابط الهدية ناقص - اطلبه مرة ثانية.'; }
+</script>
+</body></html>
