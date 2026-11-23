@@ -31,6 +31,42 @@ small{display:block;color:#93a8b4;margin-top:12px;line-height:1.4}
   <small><a href="privacy.html" style="color:#f2b544">Privacy</a> &middot; <a href="terms.html" style="color:#f2b544">Terms</a> &middot; <a href="support.html" style="color:#f2b544">Support</a></small>
 </div>
 <script>
+// 0.6.9 SHARED gift link for many people: gift.html#m.<token>. The page asks the server for THIS person's own gift
+// (wk_gift_claim: Android = the next single-use code of the pool, iPhone = the one shared Apple code), remembers it on
+// this phone (same code again on reload), then goes on exactly like a one-person link. No prices anywhere.
+// The public server address + public (anon) key are the same ones inside the Wainkum app; the server lets them do
+// nothing but this claim.
+var SB = 'https://dihnrzbrvngfjpltierm.supabase.co', ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpaG5yemJydm5nZmpwbHRpZXJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzODczOTksImV4cCI6MjEwOTk2MzM5OX0.5jG0RYeQt7p3z8fTd_xorzscHNrUjDmI7xOFr3xKgB8';
+(function () {
+  var mm = /^#?m\.([A-Za-z0-9]{20,40})$/.exec(location.hash || '');
+  if (!mm) return;
+  var tok = mm[1], kept = null;
+  try { kept = JSON.parse(localStorage.getItem('wkgift_' + tok) || 'null'); } catch (e) {}
+  if (kept && kept.h) { location.replace(location.pathname + kept.h); location.reload(); return; }
+  var dev = localStorage.getItem('wkgift_dev');
+  if (!dev) { dev = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); localStorage.setItem('wkgift_dev', dev); }
+  document.getElementById('open').style.display = 'none'; document.getElementById('store').style.display = 'none';
+  document.getElementById('how').textContent = 'Getting your gift... | جاري تجهيز هديتك...';
+  fetch(SB + '/rest/v1/rpc/wk_gift_claim', {method: 'POST', headers: {apikey: ANON, Authorization: 'Bearer ' + ANON,
+    'Content-Type': 'application/json'}, body: JSON.stringify({p_token: tok, p_device: dev})})
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (j && j.ok) {
+        var h = '#' + j.platform + '.' + j.gift + '.' + j.code;
+        localStorage.setItem('wkgift_' + tok, JSON.stringify({h: h}));
+        location.replace(location.pathname + h); location.reload(); return;
+      }
+      var why = {used_up: 'All the gifts of this link have been taken. | خلصت هدايا هذا الرابط.',
+                 expired: 'This gift link has ended. | انتهى رابط الهدية.',
+                 no_codes: 'No gift is ready right now - please ask again later. | ما في هدية جاهزة الحين - اطلبها بعدين.',
+                 busy: 'Too many tries from this network - try again in an hour. | محاولات كثيرة - جرّب بعد ساعة.'}[j && j.reason] ||
+                'This gift link is not valid any more. | رابط الهدية ما يشتغل.';
+      document.getElementById('how').textContent = why;
+    })
+    .catch(function () { document.getElementById('how').textContent = 'No internet - try again. | ما في إنترنت - جرّب مرة ثانية.'; });
+})();
+</script>
+<script>
 // 0.6.8 gift link: gift.html#<i|a>.<gift id>.<CODE>. The part after # never reaches any web server.
 // This page only hands the gift to the app (inlandsea://gift?...) or to the store's own redeem page. No prices here.
 var APP_ID = '6834355382', PKG = 'qa.inlandsea.camp';
@@ -45,7 +81,7 @@ var iphone = p === 'i';
 inst.href = iphone ? 'https://apps.apple.com/app/id' + APP_ID : 'https://play.google.com/store/apps/details?id=' + PKG;
 store.href = iphone ? 'https://apps.apple.com/redeem?ctx=offercodes&id=' + APP_ID + '&code=' + encodeURIComponent(c)
                     : 'https://play.google.com/redeem?code=' + encodeURIComponent(c);
-if (!m) { openEl.style.display = 'none'; store.style.display = 'none';
+if (!m && !/^#?m\./.test(location.hash || '')) { openEl.style.display = 'none'; store.style.display = 'none';
   document.getElementById('how').textContent = 'This gift link is not complete - ask for it again. | رابط الهدية ناقص - اطلبه مرة ثانية.'; }
 </script>
 </body></html>
