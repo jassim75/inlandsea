@@ -1,0 +1,6 @@
+<!doctype html><html dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wainkum bio</title></head>
+<body style="font:24px system-ui;padding:20px;background:#0b2230;color:#fff">
+<button id="c" style="font-size:30px;padding:24px;background:#2ecc71;border:0;border-radius:16px;width:100%">Copy bio</button>
+<p id="t" style="margin-top:24px">قروبك على خريطة وحدة 🗺️ كلّم الربع بضغطة 🚨 مجاني على App Store</p>
+<script>document.getElementById('c').onclick=function(){var s=document.getElementById('t').textContent;var a=document.createElement('textarea');a.value=s;a.style.position='fixed';a.style.top='-200px';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();if(navigator.clipboard)navigator.clipboard.writeText(s);this.textContent='Copied ✓';};</script>
+</body></html>
